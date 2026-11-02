@@ -1,0 +1,33 @@
+Atue como um Desenvolvedor Front-end Senior e Arquiteto de Software. Sua missão é planejar e implementar o código completo de um protótipo de Catálogo Online Responsivo e Interativo, projetado para ser hospedado no GitHub Pages.
+
+### 1. OBJETIVO DO PROJETO
+Criar um catálogo de produtos moderno, responsivo e interativo para demonstrações a clientes. O projeto deve servir como exibição de produtos e também como demonstrativo de funcionalidades de loja (CRUD simulado no frontend).
+
+### 2. REQUISITOS TÉCNICOS E FUNCIONAIS
+
+#### A. Hospedagem & Arquitetura (Client-Side Only)
+- O código deve ser 100% estático (HTML, CSS e JavaScript puro ou React/Vite com build estático), sem dependência de servidores backend, pronto para o GitHub Pages.
+- O gerenciamento de dados do CRUD (Adicionar, Listar, Editar e Excluir produtos/categorias) deve ser feito simulando uma API com dados persistidos no `localStorage` do navegador. Deve conter dados fictícios (mock storage) pré-carregados para a primeira inicialização.
+
+#### B. Tema Claro/Escuro (Light/Dark Mode)
+- Identificar automaticamente a preferência do sistema operacional/navegador do usuário usando `prefers-color-scheme`.
+- Disponibilizar um botão/toggle na interface para troca manual de tema.
+- Salvar a preferência manual no `localStorage` para manter a escolha do usuário em acessos futuros.
+
+#### C. Interface do Usuário (UI/UX) & Animações
+- Design Mobile-First totalmente responsivo (smartphones, tablets e desktops).
+- Animações fluidas de UI para:
+  - Entrada e transição de cards de produtos.
+  - Abertura de modais (detalhes do produto, carrinho simulado, painel de administração CRUD).
+  - Feedback visual ao adicionar itens ao carrinho ou salvar alterações.
+- Filtros interativos de busca por texto, ordenação por preço e filtragem por categorias.
+
+#### D. Demonstração de Funcionalidades de Loja (CRUD + Carrinho)
+- **Modo Vitrine (Cliente):** Visualização de produtos, busca, filtros, modal de detalhes e simulação de carrinho de compras (com cálculo de total e checkout fictício, ex: enviar pedido via WhatsApp).
+- **Modo Admin / Demo CRUD (Lojista):** Painel acessível via interface para adicionar novos produtos, editar preço/descrição/imagem, e remover itens, permitindo demonstrar ao cliente como o sistema se comporta em tempo real.
+
+### 3. ETAPAS DE EXECUÇÃO ESPERADAS DA IA
+Por favor, responda estruturando o projeto nas seguintes etapas:
+1. **Planejamento da Arquitetura:** Estrutura de pastas, tecnologias/bibliotecas recomendadas (ex: Tailwind CSS via CDN ou Vanilla JS modular) e fluxo de dados.
+2. **Código Fonte Completo:** Forneça o código funcional dos arquivos HTML, CSS e JavaScript necessários em blocos prontos para cópia.
+3. **Guia de Implantação:** Instruções passo a passo de como subir o repositório e ativar o GitHub Pages.
