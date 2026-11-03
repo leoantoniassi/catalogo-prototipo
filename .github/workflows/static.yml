@@ -1,16 +1,21 @@
-# Workflow para compilar o React com Vite e publicar no GitHub Pages
-name: Deploy do Catálogo Vite para GitHub Pages
+# Workflow para compilar o projeto React com Vite e publicar no GitHub Pages
+name: Deploy static content to Pages
 
 on:
+  # Executa o deploy automaticamente ao fazer push na branch principal (main)
   push:
     branches: ["main"]
+
+  # Permite disparar a execução manualmente pela aba "Actions" no GitHub
   workflow_dispatch:
 
+# Configura as permissões do token do GitHub para permitir a publicação no Pages
 permissions:
   contents: read
   pages: write
   id-token: write
 
+# Garante que apenas um deploy aconteça por vez
 concurrency:
   group: "pages"
   cancel-in-progress: false
@@ -22,32 +27,32 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     steps:
-      # Step 1: Baixa o código do seu repositório para o servidor do GitHub
+      # Step 1: Clona os arquivos do seu repositório para o servidor de compilação
       - name: Checkout do código
         uses: actions/checkout@v4
 
-      # Step 2: Instala o ambiente Node.js necessário para rodar o Vite
+      # Step 2: Instala e configura a versão 20 do Node.js
       - name: Configurar Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 20
           cache: 'npm'
 
-      # Step 3: Instala os pacotes listados no seu package.json
+      # Step 3: Instala todas as dependências do projeto contidas no package.json
       - name: Instalar dependências
         run: npm ci
 
-      # Step 4: Compila o projeto React gerando a pasta 'dist'
+      # Step 4: Executa o script de build do Vite para gerar a pasta 'dist'
       - name: Compilar o projeto (Build Vite)
         run: npm run build
 
-      # Step 5: Envia apenas a pasta 'dist' gerada para o GitHub Pages
+      # Step 5: Prepara a pasta 'dist' para o envio
       - name: Configurar artefato do Pages
         uses: actions/upload-pages-artifact@v3
         with:
           path: './dist'
 
-      # Step 6: Faz a publicação final da aplicação
+      # Step 6: Publica efetivamente a pasta no servidor do GitHub Pages
       - name: Publicar no GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
