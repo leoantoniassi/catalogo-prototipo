@@ -1,0 +1,53 @@
+# Workflow para compilar o React com Vite e publicar no GitHub Pages
+name: Deploy do Catálogo Vite para GitHub Pages
+
+on:
+  push:
+    branches: ["main"]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      # Step 1: Baixa o código do seu repositório para o servidor do GitHub
+      - name: Checkout do código
+        uses: actions/checkout@v4
+
+      # Step 2: Instala o ambiente Node.js necessário para rodar o Vite
+      - name: Configurar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      # Step 3: Instala os pacotes listados no seu package.json
+      - name: Instalar dependências
+        run: npm ci
+
+      # Step 4: Compila o projeto React gerando a pasta 'dist'
+      - name: Compilar o projeto (Build Vite)
+        run: npm run build
+
+      # Step 5: Envia apenas a pasta 'dist' gerada para o GitHub Pages
+      - name: Configurar artefato do Pages
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: './dist'
+
+      # Step 6: Faz a publicação final da aplicação
+      - name: Publicar no GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
